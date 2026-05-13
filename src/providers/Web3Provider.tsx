@@ -2,13 +2,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React, { ReactNode } from 'react';
 import { createConfig, http, WagmiProvider } from 'wagmi';
 import { base } from 'wagmi/chains';
-import { injected, coinbaseWallet } from 'wagmi/connectors';
+import { injected } from 'wagmi/connectors';
 
 const config = createConfig({
   chains: [base],
   connectors: [
-    injected(),
-    coinbaseWallet({ appName: 'MEME DASH', preference: 'smartWalletOnly' })
+    injected()
   ],
   transports: {
     [base.id]: http(),
