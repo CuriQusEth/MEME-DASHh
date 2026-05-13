@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GameCanvas } from './game/GameCanvas';
 import { useGameStore } from './store/gameStore';
 import { TitleScreen } from './screens/TitleScreen';
@@ -10,21 +10,22 @@ import { AnimatePresence } from 'framer-motion';
 import { useConnect, useAccount, useDisconnect } from 'wagmi';
 
 function ConnectButton() {
-  const { connect, connectors } = useConnect();
-  const { address, isConnected } = useAccount();
+  const { connect, connectors, isPending } = useConnect();
+  const { address, isConnected, isConnecting, isReconnecting } = useAccount();
   const { disconnect } = useDisconnect();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleConnect = () => {
-    if (!(window as any).ethereum && connectors.length === 0) {
-      alert("No crypto wallet detected! If you are on a mobile device or inside the AI Studio preview, please open this app in your normal browser (like Chrome/Safari) or install a wallet extension.");
-      return;
-    }
-    // Safely try the first available connector
-    const connector = connectors[0];
-    if (connector) {
-      connect({ connector });
-    }
-  };
+  if (isReconnecting) {
+    return (
+      <button 
+        disabled
+        className="absolute top-6 right-6 z-50 bg-gray-500 text-white px-6 py-2 rounded-2xl flex flex-col items-center shadow-[0_0_20px_rgba(100,100,100,0.4)] text-[10px] font-black uppercase tracking-tight"
+      >
+        <span className="text-[8px] font-black uppercase">Wallet</span>
+        RECONNECTING...
+      </button>
+    );
+  }
 
   if (isConnected) {
     return (
@@ -39,13 +40,36 @@ function ConnectButton() {
   }
 
   return (
-    <button 
-      onClick={handleConnect}
-      className="absolute top-6 right-6 z-50 bg-[var(--color-neon-green)] text-black px-6 py-2 rounded-2xl flex flex-col items-center shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105 active:scale-95 transition-all text-[10px] font-black uppercase tracking-tight"
-    >
-      <span className="text-[8px] font-black uppercase">Wallet</span>
-      CONNECT
-    </button>
+    <div className="absolute top-6 right-6 z-50 flex flex-col items-end">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        disabled={isConnecting || isPending}
+        className="bg-[var(--color-neon-green)] text-black px-6 py-2 rounded-2xl flex flex-col items-center shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105 active:scale-95 transition-all text-[10px] font-black uppercase tracking-tight"
+      >
+        <span className="text-[8px] font-black uppercase">Wallet</span>
+        {isConnecting || isPending ? 'CONNECTING...' : 'CONNECT'}
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <div className="mt-2 flex flex-col gap-2 w-48 bg-black/90 border border-[var(--color-neon-green)]/30 rounded-2xl p-2 backdrop-blur-md">
+            {connectors.map((connector) => (
+              <button
+                key={connector.uid}
+                onClick={() => {
+                  connect({ connector });
+                  setIsOpen(false);
+                }}
+                disabled={isPending || isConnecting}
+                className="w-full text-left px-4 py-3 hover:bg-white/10 rounded-xl text-xs font-bold uppercase transition-colors text-[var(--color-neon-green)]"
+              >
+                {connector.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
