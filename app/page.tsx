@@ -1,11 +1,13 @@
+'use client';
+
 import React, { useState } from 'react';
-import { GameCanvas } from './game/GameCanvas';
-import { useGameStore } from './store/gameStore';
-import { TitleScreen } from './screens/TitleScreen';
-import { GameOverScreen } from './screens/GameOverScreen';
-import { GarageScreen } from './screens/GarageScreen';
-import { LeaderboardScreen } from './screens/LeaderboardScreen';
-import { HUD } from './components/HUD';
+import { GameCanvas } from '@/src/game/GameCanvas';
+import { useGameStore } from '@/src/store/gameStore';
+import { TitleScreen } from '@/src/screens/TitleScreen';
+import { GameOverScreen } from '@/src/screens/GameOverScreen';
+import { GarageScreen } from '@/src/screens/GarageScreen';
+import { LeaderboardScreen } from '@/src/screens/LeaderboardScreen';
+import { HUD } from '@/src/components/HUD';
 import { AnimatePresence } from 'framer-motion';
 import { useConnect, useAccount, useDisconnect } from 'wagmi';
 
@@ -73,7 +75,7 @@ function ConnectButton() {
   );
 }
 
-export function AppContent() {
+export default function Home() {
   const gameState = useGameStore(s => s.gameState);
 
   return (
