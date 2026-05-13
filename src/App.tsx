@@ -15,7 +15,7 @@ function ConnectButton() {
   const { disconnect } = useDisconnect();
 
   const handleConnect = () => {
-    if (!window.ethereum && connectors.length === 0) {
+    if (!(window as any).ethereum && connectors.length === 0) {
       alert("No crypto wallet detected! If you are on a mobile device or inside the AI Studio preview, please open this app in your normal browser (like Chrome/Safari) or install a wallet extension.");
       return;
     }
