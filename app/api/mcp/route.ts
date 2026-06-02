@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-// App name, version — read from my existing files
 // Agent Name: Meme Das Orchestrator
 // Version: 1.0.0
 
@@ -9,7 +8,7 @@ export async function OPTIONS() {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
   });
 }
@@ -90,6 +89,7 @@ export async function POST(req: Request) {
       return NextResponse.json(response, { headers: { 'Access-Control-Allow-Origin': '*' } });
     }
 
+    // Handle prompts list
     if (body?.method === 'prompts/list' || body?.type === 'prompts/list') {
       const response = { prompts: [] };
       if (body?.jsonrpc) {
@@ -98,6 +98,7 @@ export async function POST(req: Request) {
       return NextResponse.json(response, { headers: { 'Access-Control-Allow-Origin': '*' } });
     }
 
+    // Handle resources list
     if (body?.method === 'resources/list' || body?.type === 'resources/list') {
       const response = { resources: [] };
       if (body?.jsonrpc) {
@@ -106,6 +107,7 @@ export async function POST(req: Request) {
       return NextResponse.json(response, { headers: { 'Access-Control-Allow-Origin': '*' } });
     }
 
+    // Handle tools call
     if (body?.method === 'tools/call' || body?.type === 'tools/call') {
       const response = {
         content: [
@@ -123,7 +125,7 @@ export async function POST(req: Request) {
       return NextResponse.json(response, { headers: { 'Access-Control-Allow-Origin': '*' } });
     }
 
-    // Default catch-all
+    // Default MCP POST catch-all
     return NextResponse.json({
       status: "success",
       message: "MCP command received",
