@@ -3,8 +3,8 @@
  * Base Mainnet standard for attributing builder transactions.
  */
 
-export const BUILDER_CODE = 'bc_khqax80a';
-export const APP_ID = '691635e0669aee60603bdd84';
+export const BUILDER_CODE = '[BUILDER_CODE]';
+export const APP_ID = '[ATTRIBUTION_CODE]';
 
 export interface AttributionRecord {
   appId: string;
