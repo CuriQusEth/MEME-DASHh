@@ -37,34 +37,43 @@ function ConnectButton() {
     });
   };
 
-  if (isConnected) {
-    return (
-      <div className="absolute top-6 right-6 z-50 flex items-center gap-3">
-        <button 
-          onClick={sendGMTransaction}
-          className="px-3 py-2 rounded-lg bg-[#E8A020]/20 hover:bg-[#E8A020]/30 border border-[#E8A020]/40 text-[#E8A020] transition-colors flex items-center gap-2 font-['Cinzel'] text-xs font-bold"
-        >
-          <Sun size={14} /> Say GM
-        </button>
-        <button 
-          onClick={() => disconnect()}
-          className="bg-[var(--color-neon-pink)] text-white px-6 py-2 rounded-2xl flex flex-col items-center shadow-[0_0_20px_rgba(255,20,147,0.4)] hover:scale-105 active:scale-95 transition-all text-[10px] font-black uppercase tracking-tight"
-        >
-          <span className="text-[8px] font-black uppercase">Wallet</span>
-          {address?.slice(0,6)}...{address?.slice(-4)}
-        </button>
-      </div>
-    );
-  }
-
   return (
-    <button 
-      onClick={handleConnect}
-      className="absolute top-6 right-6 z-50 bg-[var(--color-neon-green)] text-black px-6 py-2 rounded-2xl flex flex-col items-center shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105 active:scale-95 transition-all text-[10px] font-black uppercase tracking-tight"
-    >
-      <span className="text-[8px] font-black uppercase">Wallet</span>
-      CONNECT
-    </button>
+    <div className="absolute top-6 right-6 z-50 flex items-center gap-2">
+      {/* Base Mainnet Denim 200ms Badge */}
+      <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-[10px] font-bold tracking-wider backdrop-blur-md shadow-[0_0_12px_rgba(0,82,255,0.25)]">
+        <span className="w-2 h-2 rounded-full bg-[#0052FF] animate-ping" />
+        <span className="w-2 h-2 rounded-full bg-[#0052FF] -ml-3.5" />
+        <span>BASE MAINNET</span>
+        <span className="text-white/40">|</span>
+        <span className="text-cyan-300 font-extrabold">DENIM 200ms</span>
+      </div>
+
+      {isConnected ? (
+        <>
+          <button 
+            onClick={sendGMTransaction}
+            className="px-3 py-2 rounded-xl bg-[#E8A020]/20 hover:bg-[#E8A020]/30 border border-[#E8A020]/40 text-[#E8A020] transition-colors flex items-center gap-1.5 text-xs font-bold"
+          >
+            <Sun size={14} /> Say GM
+          </button>
+          <button 
+            onClick={() => disconnect()}
+            className="bg-[var(--color-neon-pink)] text-white px-4 py-2 rounded-xl flex flex-col items-center shadow-[0_0_20px_rgba(255,20,147,0.4)] hover:scale-105 active:scale-95 transition-all text-[10px] font-black uppercase tracking-tight"
+          >
+            <span className="text-[8px] font-black uppercase text-pink-200">BASE</span>
+            {address?.slice(0,6)}...{address?.slice(-4)}
+          </button>
+        </>
+      ) : (
+        <button 
+          onClick={handleConnect}
+          className="bg-[var(--color-neon-green)] text-black px-5 py-2.5 rounded-xl flex flex-col items-center shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105 active:scale-95 transition-all text-[10px] font-black uppercase tracking-tight"
+        >
+          <span className="text-[8px] font-black uppercase text-black/70">BASE MAINNET</span>
+          CONNECT
+        </button>
+      )}
+    </div>
   );
 }
 

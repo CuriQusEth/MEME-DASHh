@@ -18,11 +18,21 @@ export default function handler(req: any, res: any) {
       version: "1.0.0",
       name: "Meme Das MCP Endpoint",
       status: "active",
-      description: "Active MCP server for Meme Das Orchestrator Agent",
+      description: "Active MCP server for Meme Das Orchestrator Agent on Base Mainnet (Denim)",
+      network: {
+        chain: "Base Mainnet",
+        chainId: 8453,
+        caip2: "eip155:8453",
+        upgrade: "Denim",
+        blockTimeMs: 200,
+        flashblocksRetired: true,
+        rpcUrl: "https://mainnet.base.org",
+      },
       capabilities: [
         "meme-culture-management",
         "viral-content-automation",
         "dash-mechanics",
+        "denim-fast-execution",
       ],
       timestamp: new Date().toISOString(),
     });

@@ -31,8 +31,9 @@ export function LeaderboardScreen() {
         <h1 className="text-2xl md:text-3xl impact-text text-[var(--color-neon-green)] drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">LEADERBOARD</h1>
       </div>
 
-      <div className="bg-[var(--color-neon-green)]/5 border border-[var(--color-neon-green)]/20 p-4 rounded-2xl mb-6 text-center font-bold text-xs uppercase tracking-widest text-[var(--color-neon-green)]">
-        Powered by Base Mainnet & ERC-8021
+      <div className="bg-[var(--color-neon-green)]/5 border border-[var(--color-neon-green)]/20 p-4 rounded-2xl mb-6 text-center font-bold text-xs uppercase tracking-widest text-[var(--color-neon-green)] flex items-center justify-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-[#0052FF] animate-pulse"></span>
+        Powered by Base Mainnet (Denim 200ms Native Blocks) & ERC-8021
       </div>
 
       <div className="flex flex-col gap-4 overflow-y-auto pb-20">

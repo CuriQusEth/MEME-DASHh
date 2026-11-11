@@ -18,9 +18,10 @@ This project provides trustless, on-chain deterministic behavioral agents that i
 
 ## Tech Stack
 
-- **Framework:** Next.js 14 (App Router enabled for API endpoints) / Express + Vite (Frontend Preview)
+- **Framework:** Express + Vite (Fullstack Preview & Serverless API Handlers)
 - **Extensibility:** Model Context Protocol (MCP)
-- **Web3 Integration:** ERC-8004 Standard, Base Mainnet (Chain ID: eip155:8453)
+- **Web3 Integration:** ERC-8004 Standard, Base Mainnet (Chain ID: eip155:8453, Denim Upgrade: 200ms Canonical Blocks)
+- **RPC & Networking:** Base Mainnet (`https://mainnet.base.org`), Flashblocks retired post-Denim activation
 - **API Services:** A2A communications, MCP execution parsing, REST Agent API
 
 ## MCP Connection Guide

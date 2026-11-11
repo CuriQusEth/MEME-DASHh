@@ -19,6 +19,13 @@ export default function handler(req: any, res: any) {
       wallet: "0x29536D0bc1004ab274c4F0F59734Ad74D4559b7B",
       platform: "Meme Das",
       version: "1.0.0",
+      network: {
+        chain: "Base Mainnet",
+        chainId: 8453,
+        upgrade: "Denim",
+        blockTime: "200ms",
+        canonicalBlocks: true,
+      },
     });
   }
 

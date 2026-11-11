@@ -14,13 +14,13 @@ export function TitleScreen() {
 
   const handleSayGM = async () => {
     if (!isConnected) {
-      alert("Connect your wallet on BASE first to say GM on-chain!");
+      alert("Connect your wallet on BASE Mainnet first to say GM on-chain!");
       return;
     }
     
     try {
       const payload = prepareAttributedTransaction("SAY_GM");
-      const message = `GM from Memelord!\nWitness my presence on Base network.\n\nPayload: ${payload}`;
+      const message = `GM from Memelord!\nWitness my presence on Base Mainnet (Denim 200ms blocks).\n\nPayload: ${payload}`;
       await signMessageAsync({ message } as any);
       setIsGm(true);
       setTimeout(() => setIsGm(false), 3000);
@@ -36,7 +36,11 @@ export function TitleScreen() {
       exit={{ opacity: 0, scale: 0.9 }}
       className="absolute inset-0 flex flex-col items-center justify-center p-6 z-20"
     >
-      <div className="text-center mb-10">
+      <div className="text-center mb-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1 mb-3 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono font-bold tracking-widest uppercase">
+          <span className="w-2 h-2 rounded-full bg-[#0052FF] animate-pulse"></span>
+          BASE MAINNET • DENIM 200ms
+        </div>
         <motion.h1 
           animate={{ rotate: [-2, 2, -2] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}

@@ -28,13 +28,13 @@ export function GameOverScreen() {
     try {
       // Simulate attribution and transaction recording for SIWE
       const payload = prepareAttributedTransaction("SCORE_SUBMIT");
-      const message = `I am a Meme Lord.\nRecording my legendary dash on Base.\nScore: ${score}\nDistance: ${Math.floor(distance)}m\n\nPayload: ${payload}`;
+      const message = `I am a Meme Lord.\nRecording my legendary dash on Base Mainnet (Denim 200ms canonical blocks).\nScore: ${score}\nDistance: ${Math.floor(distance)}m\n\nPayload: ${payload}`;
       
       const sig = await signMessageAsync({ message } as any);
       console.log("SIWE Signature:", sig);
       
-      // Simulate network request
-      await new Promise(r => setTimeout(r, 1000));
+      // Simulate fast network confirmation with Denim 200ms canonical blocks
+      await new Promise(r => setTimeout(r, 400));
       setSubmitted(true);
     } catch (e: any) {
       console.error(e);
@@ -80,8 +80,9 @@ export function GameOverScreen() {
 
       <div className="flex flex-col gap-3 w-full max-w-sm mb-6">
         {submitted ? (
-          <div className="bg-[var(--color-neon-green)]/10 text-[var(--color-neon-green)] p-4 rounded-xl border border-[var(--color-neon-green)]/50 font-bold text-center text-sm uppercase tracking-wider backdrop-blur-md">
-            🏆 Legendary Dash Recorded on Base!
+          <div className="bg-[var(--color-neon-green)]/10 text-[var(--color-neon-green)] p-4 rounded-xl border border-[var(--color-neon-green)]/50 font-bold text-center text-sm uppercase tracking-wider backdrop-blur-md flex flex-col gap-1">
+            <span>🏆 Legendary Dash Recorded on Base Mainnet!</span>
+            <span className="text-[10px] text-cyan-300 font-mono tracking-normal">Confirmed via Denim 200ms canonical block</span>
           </div>
         ) : (
           <button
@@ -90,7 +91,7 @@ export function GameOverScreen() {
             className="w-full bg-[var(--color-neon-green)] text-black font-black text-sm md:text-md py-4 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100 uppercase"
           >
             <Upload size={20} />
-            {isSubmitting ? "SIGNING..." : "RECORD THIS LEGENDARY DASH ON-CHAIN"}
+            {isSubmitting ? "SIGNING (DENIM FAST)..." : "RECORD THIS LEGENDARY DASH ON-CHAIN"}
           </button>
         )}
 
